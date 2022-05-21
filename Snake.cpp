@@ -19,8 +19,10 @@ struct SNAKE
 
 struct ZONE
 {
-    NODE topleft;
-    NODE bottomright;
+    int top;
+    int bottom;
+    int left;
+    int right;
 };
 
 void gotoxy(int x, int y)
@@ -36,33 +38,35 @@ void gotoxy(int x, int y)
 
 void InitZone(ZONE &zone)
 {
-    zone.topleft.x = 5;
-    zone.topleft.y = 5;
-    zone.bottomright.x = 35;
-    zone.bottomright.y = 25;
+    zone.top = 5;
+    zone.left = 5;
+    zone.right = 35;
+    zone.bottom = 25;
 }
 
 void DrawZone(ZONE zone)
 {
-    gotoxy(zone.topleft.x, zone.topleft.y);
-    for (int i = zone.topleft.x; i < zone.bottomright.x; i++)
+    gotoxy(zone.left, zone.top);
+    for (int i = zone.left; i < zone.right; i++)
     {
         cout << "#";
     }
 
-    for (int i = zone.topleft.y; i < zone.bottomright.y; i++)
+    for (int i = zone.top; i < zone.bottom; i++)
     {
-        gotoxy(zone.topleft.x, i);
+        gotoxy(zone.left, i);
         cout << "#";
     }
-    gotoxy(zone.topleft.x, zone.bottomright.y);
-    for (int i = zone.topleft.x; i < zone.bottomright.x; i++)
+
+    gotoxy(zone.left, zone.bottom);
+    for (int i = zone.left; i < zone.right; i++)
     {
         cout << "#";
     }
-    for (int i = zone.topleft.y; i < zone.bottomright.y; i++)
+
+    for (int i = zone.top; i < zone.bottom; i++)
     {
-        gotoxy(zone.bottomright.x, i);
+        gotoxy(zone.right, i);
         cout << "#";
     }
 }
@@ -139,7 +143,7 @@ void Run(SNAKE &snake, int &dir, int olddir)
 
 void DrawScore(ZONE zone)
 {
-    gotoxy(zone.bottomright.x + 5, zone.bottomright.y);
+    gotoxy(zone.right + 5, zone.top);
     cout << "SCORE: " << Score;
 }
 
@@ -170,8 +174,9 @@ int main()
     InitSnake(snake);
     DrawSnake(snake);
 
-    food.x = RandomInt(zone.topleft.x, zone.bottomright.x); // Random vi tri thuc an
-    food.y = RandomInt(zone.topleft.y, zone.bottomright.y);
+    food.x = RandomInt(zone.left + 1, zone.right - 1); // Random vi tri thuc an
+    food.y = RandomInt(zone.top + 1, zone.bottom - 1);
+    
     gotoxy(food.x, food.y);
     cout << "X"; // hinh dang thuc an
 
@@ -186,8 +191,8 @@ int main()
             {
                 snake.Length++;
                 Score++;
-                food.x = RandomInt(zone.topleft.x + 1, zone.bottomright.x - 1);
-                food.y = RandomInt(zone.topleft.y + 1, zone.bottomright.y - 1);
+                food.x = RandomInt(zone.left + 1, zone.right - 1);
+                food.y = RandomInt(zone.top + 1, zone.bottom - 1);
                 gotoxy(food.x, food.y);
                 cout << "X";
             }
@@ -221,7 +226,7 @@ int main()
                 break;
             }
         }
-        if (snake.A[0].x <= zone.topleft.x || snake.A[0].y <= zone.topleft.y || snake.A[0].x >= zone.bottomright.x || snake.A[0].y >= zone.bottomright.y)
+        if (snake.A[0].x <= zone.left || snake.A[0].y <= zone.top || snake.A[0].x >= zone.right || snake.A[0].y >= zone.bottom)
         {
             flag = 1;
         }
