@@ -43,7 +43,6 @@ void DrawPause()
 
 void Snake::Move()
 {
-	RemoveTail();
 	if (_kbhit())
 	{
 		olddir = dir;
