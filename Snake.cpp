@@ -20,7 +20,7 @@ Snake::Snake()
 
 void Snake::Draw()
 {
-	RemoveTail();
+	
 	for (int i = 0; i < Length; i++)
 	{
 		Func::gotoxy(A[i].x, A[i].y);
@@ -43,6 +43,7 @@ void DrawPause()
 
 void Snake::Move()
 {
+	RemoveTail();
 	if (_kbhit())
 	{
 		olddir = dir;
