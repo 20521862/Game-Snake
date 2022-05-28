@@ -74,8 +74,46 @@ void DrawTime()
 	cout << "TIME: " << Time;
 }
 
-bool CheckLose(Snake &snake, Zone zone)
+void CheckSnakeEat(Snake &snake, Zone &zone, Food &food)
 {
+	for (int i = 0; i < snake.Length; i++)
+	{
+		if (snake.A[i].x == food.x && snake.A[i].y == food.y) // Nếu thân rắn chạm thức ăn
+		{
+			if (i == 0) // Chỉ đầu rắn chạm thức ăn mới được điểm
+			{
+				snake.Length++;
+				Score += 10;
+			}
+			else // Nếu lỡ food có random trong phần thân rắn
+			{
+				Func::gotoxy(food.x, food.y);
+				cout << " ";
+			}
+			food = food.Random(zone);
+			food.Draw();
+		}
+	}
+}
+
+bool CheckLose(Snake &snake, Zone &zone, Food &food)
+{
+	if (MODE == 3) //MODE Hard
+	{
+		if (Time == Time2)
+		{
+			Time2 += 20;
+			zone.Erase();
+			zone.bottom -= 1;
+			zone.left += 1;
+			zone.right -= 1;
+			zone.top += 1;
+			food.Erase();
+			zone.Draw();
+			food = food.Random(zone);
+			food.Draw();
+		}
+	}
 	for (int i = 1; i < snake.Length; i++)
 	{
 		if (snake.A[0].x == snake.A[i].x && snake.A[0].y == snake.A[i].y) // Nếu đầu rắn ăn thân
@@ -85,7 +123,8 @@ bool CheckLose(Snake &snake, Zone zone)
 	}
 	if (MODE == 2 || MODE == 3)
 	{
-		if (snake.A[0].x <= zone.left || snake.A[0].y <= zone.top || snake.A[0].x >= zone.right || snake.A[0].y >= zone.bottom) // Nếu chạm vào tường
+		// Nếu chạm vào tường
+		if (snake.A[0].x <= zone.left || snake.A[0].y <= zone.top || snake.A[0].x >= zone.right || snake.A[0].y >= zone.bottom)
 		{
 			return false;
 		}
@@ -144,48 +183,12 @@ int main()
 
 	while (1)
 	{
-		if (MODE == 3) //MODE Hard
-		{
-			if (Time == Time2)
-			{
-				Time2 += 20;
-				zone.Erase();
-				zone.bottom -= 1;
-				zone.left += 1;
-				zone.right -= 1;
-				zone.top += 1;
-				food.Erase();
-				zone.Draw();
-				food = food.Random(zone);
-				food.Draw();
-			}
-		}
-
-		for (int i = 0; i < snake.Length; i++)
-		{
-			if (snake.A[i].x == food.x && snake.A[i].y == food.y) // Nếu thân rắn chạm thức ăn
-			{
-				if (i == 0) // Chỉ đầu rắn chạm thức ăn mới được điểm
-				{
-					snake.Length++;
-					Score += 10;
-				}
-				else // Nếu lỡ food có random trong phần thân rắn
-				{
-					Func::gotoxy(food.x, food.y);
-					cout << " ";
-				}
-				food = food.Random(zone);
-				food.Draw();
-			}
-		}
-
-		snake.RemoveTail();
+		CheckSnakeEat(snake, zone, food);
 		snake.Move();
 		snake.Draw();
 		DrawScore();
 		DrawTime();
-		if (!CheckLose(snake, zone)) // Kiểm tra thắng thua
+		if (!CheckLose(snake, zone, food)) // Kiểm tra thắng thua
 			break;
 
 		Func::gotoxy(0, 0); // Đưa con trỏ lên góc trên bên trái
