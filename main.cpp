@@ -90,7 +90,7 @@ void CheckSnakeEat(Snake &snake, Zone &zone, Food &food)
 				Func::gotoxy(food.x, food.y);
 				cout << " ";
 			}
-			food = food.Random(zone);
+			food.Random(zone);
 			food.Draw();
 		}
 	}
@@ -110,7 +110,7 @@ bool CheckLose(Snake &snake, Zone &zone, Food &food)
 			zone.top += 1;
 			food.Erase();
 			zone.Draw();
-			food = food.Random(zone);
+			food.Random(zone);
 			food.Draw();
 		}
 	}
@@ -178,7 +178,7 @@ int main()
 	std::cout << "Press SPACE to pause . . . . .";
 
 	Food food;
-	food = food.Random(zone);
+	food.Random(zone);
 	food.Draw();
 
 	while (1)

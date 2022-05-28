@@ -10,13 +10,11 @@ int RandomInt(int min, int max)
 	return n;
 }
 
-Food Food::Random(Zone zone)
+void Food::Random(Zone zone)
 {
 	srand(time(NULL));
-	Food food;
-	food.x = RandomInt(zone.left + 1, zone.right - 1);
-	food.y = RandomInt(zone.top + 1, zone.bottom - 1);
-	return food;
+	x = RandomInt(zone.left + 1, zone.right - 1);
+	y = RandomInt(zone.top + 1, zone.bottom - 1);
 }
 
 void Food::Draw()

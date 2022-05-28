@@ -20,7 +20,6 @@ Snake::Snake()
 
 void Snake::Draw()
 {
-	
 	for (int i = 0; i < Length; i++)
 	{
 		Func::gotoxy(A[i].x, A[i].y);

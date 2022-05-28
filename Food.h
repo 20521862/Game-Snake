@@ -4,7 +4,7 @@ class Food
 {
 public:
 	int x, y;
-	Food Random(Zone zone);
+	void Random(Zone zone);
 	void Draw();
 	void Erase();
 };
