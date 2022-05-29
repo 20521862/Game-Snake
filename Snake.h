@@ -1,5 +1,5 @@
 #pragma once
-
+#include <SFML/Graphics.hpp>
 struct NODE
 {
 	int x, y;
@@ -7,12 +7,13 @@ struct NODE
 class Snake
 {
 public:
-	NODE A[100];
-	int Length, dir, olddir;
-	Snake();
-	void Draw();
-	void Move();
-	void RemoveTail();
+	NODE A[1000];
+	int Length;
+	sf::Sprite spriteSnake;
+	sf::Sprite spriteHeadSnake;
+	Snake(sf::Sprite sprite, sf::Sprite spriteHead);
+	void Draw(sf::RenderWindow& window);
+	void Move(int dir);
 };
 
 

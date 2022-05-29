@@ -2,29 +2,22 @@
 #include <chrono>
 #include <iostream>
 #include "Zone.h"
-#include "Func.h"
-int RandomInt(int min, int max)
-{
-	srand(time(NULL));
-	int n = rand() % (max - min + 1) + min;
-	return n;
-}
+#include "ConstNumber.h"
+#include <SFML/Graphics.hpp>
 
+Food::Food(sf::Sprite sprite)
+{
+	spriteFood = sprite;
+}
+//set random for food
 void Food::Random(Zone zone)
 {
-	srand(time(NULL));
-	x = RandomInt(zone.left + 1, zone.right - 1);
-	y = RandomInt(zone.top + 1, zone.bottom - 1);
+	x = rand() % zone.w + zone.position;
+	y = rand() % zone.h + zone.position;
 }
-
-void Food::Draw()
+//draw food
+void Food::Draw(sf::RenderWindow& window)
 {
-	Func::gotoxy(x, y);
-	std::cout << "X"; // hinh dang thuc an
-}
-
-void Food::Erase()
-{
-	Func::gotoxy(this->x, this->y);
-	std::cout << " ";
+	spriteFood.setPosition(x * ConstNumber::size, y * ConstNumber::size);
+	window.draw(spriteFood);
 }

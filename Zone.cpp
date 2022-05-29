@@ -1,64 +1,20 @@
 #include "Zone.h"
-#include <iostream>
-#include "Func.h"
+#include "ConstNumber.h"
+#include <SFML/Graphics.hpp>
 Zone::Zone()
 {
-	top = 5;
-	left = 5;
-	right = 35;
-	bottom = 25;
+	w = 30;
+	h = 20;
+	position = 5;
 }
+//draw zone on display
 
-void Zone::Draw()
+void Zone::Draw(sf::RenderWindow& window)
 {
-	Func::gotoxy(left, top);
-	for (int i = left; i < right; i++)
-	{
-		cout << "#";
-	}
-
-	for (int i = top; i < bottom; i++)
-	{
-		Func::gotoxy(left, i);
-		cout << "#";
-	}
-
-	Func::gotoxy(left, bottom);
-	for (int i = left; i < right; i++)
-	{
-		cout << "#";
-	}
-
-	for (int i = top; i < bottom + 1; i++)
-	{
-		Func::gotoxy(right, i);
-		cout << "#";
-	}
-}
-
-void Zone::Erase()
-{
-	Func::gotoxy(left, top);
-	for (int i = left; i < right; i++)
-	{
-		cout << " ";
-	}
-
-	for (int i = top; i < bottom; i++)
-	{
-		Func::gotoxy(left, i);
-		cout << " ";
-	}
-
-	Func::gotoxy(left, bottom);
-	for (int i = left; i < right; i++)
-	{
-		cout << " ";
-	}
-
-	for (int i = top; i < bottom + 1; i++)
-	{
-		Func::gotoxy(right, i);
-		cout << " ";
-	}
+	sf::RectangleShape rectangle(sf::Vector2f(w * ConstNumber::size, h * ConstNumber::size));
+	rectangle.setFillColor(sf::Color::Color(141, 160, 0, 255));
+	rectangle.setOutlineThickness(20);
+	rectangle.setOutlineColor(sf::Color::Cyan);
+	rectangle.setPosition(position * ConstNumber::size, position * ConstNumber::size);
+	window.draw(rectangle);
 }

@@ -1,16 +1,12 @@
 #pragma once
-
+#include <SFML/Graphics.hpp>
 using namespace std;
 class Zone
 {
-public :
-	int top;
-	int bottom;
-	int left;
-	int right;
+public:
+	int w, h, position;
 	Zone();
-	void Draw();
-	void Erase();
+	void Draw(sf::RenderWindow& window);
 };
 
 
