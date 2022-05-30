@@ -154,6 +154,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Menu2.cpp" />
     <ClCompile Include="Menu3.cpp" />
+    <ClCompile Include="Menu4.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="Thank.cpp" />
     <ClCompile Include="Zone.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Menu2.h" />
     <ClInclude Include="Menu3.h" />
+    <ClInclude Include="Menu4.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="Thank.h" />
     <ClInclude Include="Zone.h" />
