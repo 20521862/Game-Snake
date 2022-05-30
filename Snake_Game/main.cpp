@@ -11,7 +11,6 @@
 #include "Thank.h"
 using namespace sf;
 // set const number
-int SPEED = 0;
 int dir = 0;
 int Score = 0;
 int MODE = 1;
@@ -169,7 +168,7 @@ void thank()
 
 	}
 }
-void selectspeed(int& a)
+void selectspeed(float& a)
 {
 	// set display for select game mode
 	sf::RenderWindow window1(sf::VideoMode(500, 400), "Speed");
@@ -206,13 +205,13 @@ void selectspeed(int& a)
 					switch (menu4.GetPressedItem())
 					{
 					case 0: //slow
-						SPEED = 230;
+						delay = 0.27;
 						break;
 					case 1: //normal
-						SPEED = 100;
+						delay = 0.1;
 						break;
 					case 2: //fast
-						SPEED = 0;
+						delay= 0.06;
 						break;
 					}
 					window1.close();
@@ -458,7 +457,7 @@ void playgame()
 		drawPause(arial, window);
 		window.display();
 
-		sleep(milliseconds(SPEED));
+		sleep(milliseconds(15));
 	}
 }
 
@@ -509,7 +508,7 @@ void selectmode()
 						break;
 					}
 					window1.close();
-					selectspeed(SPEED);
+					selectspeed(delay);
 					break;
 				}
 
