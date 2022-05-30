@@ -17,3 +17,11 @@ void Zone::Draw(sf::RenderWindow& window)
 	rectangle.setPosition(position * ConstNumber::size, position * ConstNumber::size); //Set vị trí bắt đầu vẽ zone
 	window.draw(rectangle);
 }
+
+void Zone::DrawModeEasy(sf::RenderWindow& window)
+{
+	sf::RectangleShape rectangle(sf::Vector2f(w * ConstNumber::size, h * ConstNumber::size)); //tạo chữ nhật có kích thước w * h
+	rectangle.setFillColor(sf::Color::Color(141, 160, 0, 255)); //set color cho hình (color background zone)
+	rectangle.setPosition(position * ConstNumber::size, position * ConstNumber::size); //Set vị trí bắt đầu vẽ zone
+	window.draw(rectangle);
+}

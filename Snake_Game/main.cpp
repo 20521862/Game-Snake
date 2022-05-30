@@ -358,7 +358,15 @@ void playgame()
 
 		window.clear();
 		//setting for game graphic
-		zone.Draw(window);
+		if (MODE == 1)
+		{
+			zone.DrawModeEasy(window);
+		}
+		else
+		{
+			zone.Draw(window);
+		}
+		
 		snake.Draw(window);
 		food.Draw(window);
 		drawScore(arial, window);
