@@ -170,7 +170,7 @@ void thank()
 
 	}
 }
-void selectspeed(int& a)
+void selectspeed()
 {
 	// set display for select game mode
 	sf::RenderWindow window1(sf::VideoMode(500, 400), "Speed");
@@ -213,7 +213,7 @@ void selectspeed(int& a)
 						delay = 0.1;
 						break;
 					case 2: //fast
-						SPEED = 0;
+						delay = 0.06;
 						break;
 					}
 					window1.close();
@@ -462,7 +462,7 @@ void playgame()
 		drawPause(arial, window);
 		window.display();
 
-		sleep(milliseconds(SPEED));
+		sleep(milliseconds(1));
 	}
 }
 
@@ -513,7 +513,7 @@ void selectmode()
 						break;
 					}
 					window1.close();
-					selectspeed(SPEED);
+					selectspeed();
 					break;
 				}
 
