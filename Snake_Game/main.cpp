@@ -247,7 +247,7 @@ void selectspeed(int& a)
 		}
 		text.setFont(font);
 		text.setFillColor(sf::Color::Black);
-		text.setString("                 Select spped mode");
+		text.setString("                 Select speed mode");
 		window1.draw(text);
 		menu4.draw(window1);
 		window1.display();
