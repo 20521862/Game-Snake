@@ -205,7 +205,7 @@ void selectspeed(float& a)
 					switch (menu4.GetPressedItem())
 					{
 					case 0: //slow
-						delay = 0.27;
+						delay = 0.17;
 						break;
 					case 1: //normal
 						delay = 0.1;
