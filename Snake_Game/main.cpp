@@ -7,10 +7,11 @@
 #include "Menu.h"
 #include "Menu2.h"
 #include "Menu3.h"
+#include "Menu4.h"
 #include "Thank.h"
 using namespace sf;
 // set const number
-
+int SPEED = 0;
 int dir = 0;
 int Score = 0;
 int MODE = 1;
@@ -168,7 +169,90 @@ void thank()
 
 	}
 }
+void selectspeed(int& a)
+{
+	// set display for select game mode
+	sf::RenderWindow window1(sf::VideoMode(500, 400), "Speed");
+	sf::Texture background;
+	//load backgorund
+	background.loadFromFile("images/hi.bmp");
+	sf::Sprite spriteBG;
+	Vector2u size = background.getSize();
+	spriteBG.setTexture(background);
+	spriteBG.setOrigin(size.x / 10, size.y / 10);
+	//set menu select game mode
+	Menu4 menu4(window1.getSize().x, window1.getSize().y);
 
+	while (window1.isOpen())
+	{
+		sf::Event event;
+		//choose
+		while (window1.pollEvent(event))
+		{
+			switch (event.type)
+			{
+			case sf::Event::KeyReleased:
+				switch (event.key.code)
+				{
+				case sf::Keyboard::Up:
+					menu4.MoveUp();
+					break;
+
+				case sf::Keyboard::Down:
+					menu4.MoveDown();
+					break;
+
+				case sf::Keyboard::Return:
+					switch (menu4.GetPressedItem())
+					{
+					case 0: //slow
+						SPEED = 230;
+						break;
+					case 1: //normal
+						SPEED = 100;
+						break;
+					case 2: //fast
+						SPEED = 0;
+						break;
+					}
+					window1.close();
+					playgame();
+					break;
+				}
+
+				break;
+			case sf::Event::Closed:
+				window1.close();
+				break;
+
+			}
+		}
+		window1.clear();
+		//set backgroubd
+		sf::Event event1;
+		sf::Event e;
+		while (window1.pollEvent(e))
+		{
+			if (e.type == sf::Event::Closed)
+				window1.close();
+		}
+		window1.draw(spriteBG);
+
+		//set text
+		sf::Text text;
+		sf::Font font;
+		if (!font.loadFromFile("font/arial.ttf"))
+		{
+			// error...
+		}
+		text.setFont(font);
+		text.setFillColor(sf::Color::Black);
+		text.setString("                 Select spped mode");
+		window1.draw(text);
+		menu4.draw(window1);
+		window1.display();
+	}
+}
 void gameover()
 {
 	//set display for gameover
@@ -252,7 +336,7 @@ void gameover()
 }
 // draw text "Press space to pause game
 void drawPause(Font font, RenderWindow& window)
-{	
+{
 	//set text
 	sf::Text text;
 	text.setFont(font);
@@ -366,7 +450,7 @@ void playgame()
 		{
 			zone.Draw(window);
 		}
-		
+
 		snake.Draw(window);
 		food.Draw(window);
 		drawScore(arial, window);
@@ -374,12 +458,12 @@ void playgame()
 		drawPause(arial, window);
 		window.display();
 
-		sleep(milliseconds(15));
+		sleep(milliseconds(SPEED));
 	}
 }
 
 void selectmode()
-{ 
+{
 	// set display for select game mode
 	sf::RenderWindow window1(sf::VideoMode(500, 400), "Mode");
 	sf::Texture background;
@@ -425,7 +509,7 @@ void selectmode()
 						break;
 					}
 					window1.close();
-					playgame();
+					selectspeed(SPEED);
 					break;
 				}
 
@@ -484,7 +568,7 @@ void Start()
 		sf::Event event;
 
 		while (window.pollEvent(event))
-		{	
+		{
 			// choose
 			switch (event.type)
 			{
@@ -553,6 +637,7 @@ void Start()
 		window.display();
 	}
 }
+
 
 
 
